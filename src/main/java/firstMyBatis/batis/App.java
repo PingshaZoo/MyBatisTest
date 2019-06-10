@@ -23,18 +23,16 @@ public class App {
 		
 		
 		
-		String resPath = "/SqlMapConfig.xml";
-//		File f = new File(resPath);
-//		FileInputStream is = new FileInputStream(f);
-//		byte b[] = new byte[512];
-//		is.read(b, 0, 512);
-//		System.out.println(new String(b));
+		String resPath = "SqlMapConfig.xml";
 		
 		Reader reader = Resources.getResourceAsReader(resPath);
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		City city = sqlSession.selectOne("City.findCityByID", 1);
-		System.out.println(city.toString());
+		for(int i = 1;i<100;i++) {
+			City city = sqlSession.selectOne("City.findCityByID", i);
+			System.out.println(city.toString());
+		}
+
 		sqlSession.close();
 		
 	}

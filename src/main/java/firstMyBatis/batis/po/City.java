@@ -42,7 +42,7 @@ public class City {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return super.toString()+"   "+this.name;
+		return  this.id + "   "+this.countryCode+"   "+this.name;
 	}
 
 }

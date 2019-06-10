@@ -13,8 +13,7 @@
 				<property name="driver" value="com.mysql.cj.jdbc.Driver" />
 				<!-- property name="url" value="jdbc:mysql://localhost:3306/world?useSSL=false&serverTimezone=UTC"/ -->
 				<!-- property name="url" value="jdbc:mysql://localhost:3306/world?useSSL=false"/ -->
-				<property name="url"
-					value="jdbc:mysql://localhost:3306/world?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT" />
+				<property name="url" value="jdbc:mysql://localhost:3306/world?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT" />
 				<property name="username" value="root" />
 				<property name="password" value="123456" />
 			</dataSource>
