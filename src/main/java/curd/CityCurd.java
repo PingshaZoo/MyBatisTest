@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import dao.CityMapper;
 import firstMyBatis.batis.po.City;
 
 public class CityCurd {
@@ -38,8 +39,7 @@ public class CityCurd {
 		return city;
 
 	}
-	
-	
+
 	public static void insertOne() throws Exception {
 		String resPath = "SqlMapConfig.xml";
 		Reader reader = Resources.getResourceAsReader(resPath);
@@ -57,7 +57,7 @@ public class CityCurd {
 		sqlSession.close();
 
 	}
-	
+
 	public static void deleteCity() throws Exception {
 		String resPath = "SqlMapConfig.xml";
 		Reader reader = Resources.getResourceAsReader(resPath);
@@ -68,10 +68,10 @@ public class CityCurd {
 		sqlSession.close();
 
 	}
-	
+
 	public static void updateCity() throws Exception {
 		City city = selectOne();
-		
+
 		String resPath = "SqlMapConfig.xml";
 		Reader reader = Resources.getResourceAsReader(resPath);
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
@@ -82,6 +82,20 @@ public class CityCurd {
 		sqlSession.close();
 		selectOne();
 	}
-	
-	
+
+	public static void tryMapper() throws Exception {
+		String resPath = "SqlMapConfig.xml";
+		Reader reader = Resources.getResourceAsReader(resPath);
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+
+		CityMapper cityMapper = sqlSession.getMapper(CityMapper.class);
+		List<City> citys = cityMapper.findCityByName("los");
+		
+		for (City city : citys) {
+			System.out.println(city.toString());
+		}
+
+	}
+
 }

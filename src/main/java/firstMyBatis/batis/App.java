@@ -21,6 +21,6 @@ import firstMyBatis.batis.po.City;
  */
 public class App {
 	public static void main(String[] args) throws Exception {
-		CityCurd.updateCity();
+		CityCurd.tryMapper();
 	}
 }
