@@ -5,6 +5,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import pojo.City;
 
+/*
+ * mybatis 可以只写mapper的xml和java文件就可以了，不需要写dao和它的接口实现
+ */
 public class CityDaoImpl implements CityDao {
 
 	CityDaoImpl(SqlSessionFactory factory) {
