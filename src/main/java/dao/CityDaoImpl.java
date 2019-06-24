@@ -3,7 +3,7 @@ package dao;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import firstMyBatis.batis.po.City;
+import pojo.City;
 
 public class CityDaoImpl implements CityDao {
 

@@ -1,8 +1,8 @@
-package dao;
+package mappers;
 
 import java.util.List;
 
-import firstMyBatis.batis.po.City;
+import pojo.City;
 
 
 

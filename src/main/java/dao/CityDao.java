@@ -1,6 +1,6 @@
 package dao;
 
-import firstMyBatis.batis.po.City;
+import pojo.City;
 
 public interface CityDao {
 

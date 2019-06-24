@@ -8,8 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import dao.CityMapper;
-import firstMyBatis.batis.po.City;
+import mappers.CityMapper;
+import pojo.City;
 
 public class CityCurd {
 

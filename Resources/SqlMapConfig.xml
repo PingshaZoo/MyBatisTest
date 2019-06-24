@@ -2,6 +2,8 @@
  
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!-- 加装db属性配置文件 -->
+    <properties resource="db.properties"></properties>
 	<!--系统设置 -->
 	<!--指定简写名 -->
 	<!--配置环境，可以配置多个环境用于测试、调试和生产 -->
@@ -11,19 +13,24 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
                 <!--mysql8用这个 property name="driver" value="com.mysql.cj.jdbc.Driver" / -->
-				<property name="driver" value="com.mysql.cj.jdbc.Driver" />
+				<property name="driver" value="${jdbc.driver}" />
 				<!-- property name="url" value="jdbc:mysql://localhost:3306/world?useSSL=false&serverTimezone=UTC"/ -->
 				<!-- property name="url" value="jdbc:mysql://localhost:3306/world?useSSL=false"/ -->
-				<property name="url" value="jdbc:mysql://localhost:3306/world?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT" />
-				<property name="username" value="root" />
-				<property name="password" value="123456" />
+                <!-- property name="url" value="jdbc:mysql://localhost:3306/world?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC"/ -->
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
 			</dataSource>
 
 		</environment>
 	</environments>
 	<!--配置映射文件 -->
 	<mappers>
-		<mapper resource="CityMapper.xml" />
+        <!-- 扫描包下面的xml和java文件  批量加载 -->
+        <package name="mappers"/>
+        <!-- 有resource和class两种导入方法 -->
+        <!-- <mapper resource="CityMapper.xml" />  -->
+		<!-- <mapper class="mappers.CityMapper" /> -->
 
 	</mappers>
 

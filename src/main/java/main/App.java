@@ -1,4 +1,4 @@
-package firstMyBatis.batis;
+package main;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +13,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import curd.CityCurd;
-import firstMyBatis.batis.po.City;
+import pojo.City;
 
 /**
  * Hello world!
