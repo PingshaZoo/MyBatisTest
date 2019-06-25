@@ -1,6 +1,7 @@
 package curd;
 
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -66,12 +67,10 @@ public class CityCurd {
 		sqlSession.delete("dao.CityMapper.deleteCityById", "333");
 		sqlSession.commit();
 		sqlSession.close();
-
 	}
 
 	public static void updateCity() throws Exception {
 		City city = selectOne();
-
 		String resPath = "SqlMapConfig.xml";
 		Reader reader = Resources.getResourceAsReader(resPath);
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
@@ -83,7 +82,7 @@ public class CityCurd {
 		selectOne();
 	}
 
-	public static void tryMapper() throws Exception {
+	public static void tryMapperInterfaceGenerator() throws Exception {
 		String resPath = "SqlMapConfig.xml";
 		Reader reader = Resources.getResourceAsReader(resPath);
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
@@ -91,11 +90,47 @@ public class CityCurd {
 
 		CityMapper cityMapper = sqlSession.getMapper(CityMapper.class);
 		List<City> citys = cityMapper.findCityByName("los");
-		
 		for (City city : citys) {
 			System.out.println(city.toString());
 		}
 
+	}
+
+	public static void tryFindCitysByCity() throws Exception {
+		String resPath = "SqlMapConfig.xml";
+		Reader reader = Resources.getResourceAsReader(resPath);
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+
+		CityMapper cityMapper = sqlSession.getMapper(CityMapper.class);
+		City city = null;
+//		city.setId("23");
+//		city.setCountryCode("NLD");
+		List<City> citys = cityMapper.findCitysByCity(city);
+
+		for (City c : citys) {
+			System.out.println(c.toString());
+		}
+
+	}
+
+	/*
+	 * 动态sql的拼接 foreach遍历参数
+	 */
+	public static void tryFindCitysByIds() throws Exception {
+		String resPath = "SqlMapConfig.xml";
+		Reader reader = Resources.getResourceAsReader(resPath);
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+
+		CityMapper cityMapper = sqlSession.getMapper(CityMapper.class);
+		ArrayList<String> ids = new ArrayList<String>();
+		ids.add("23");
+		ids.add("20");
+		List<City> citys = cityMapper.findCitysByIds(ids);
+		for (City c : citys) {
+			System.out.println(c.toString());
+		}
 	}
 
 }

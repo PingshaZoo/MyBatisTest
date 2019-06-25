@@ -17,6 +17,43 @@
          select * from city where name like '%${value}%'
     </select>
     
+    <!-- 动态sql的拼接  -->
+    <select  id="findCitysByCity" parameterType="pojo.City"  resultType="pojo.City">
+         select * from city 
+         <where>
+            <!-- where标签 会去掉第一个and -->
+            <if test="id!=null and id!='' ">
+            and id=#{id}
+            </if>
+            <if test="name !=null and name !='' ">
+            and name=#{name}
+            </if>
+            <if test="countryCode !=null and countryCode !='' ">
+            and countryCode=#{countryCode}
+            </if>
+            <if test="district !=null and district !='' ">
+            and district=#{district}
+            </if>
+         </where>
+         
+    </select>
+    
+        <!-- 动态sql的拼接 foreach遍历参数 -->
+    <select  id="findCitysByIds" parameterType="java.util.List"  resultType="pojo.City">
+         select * from city 
+         <where>
+            <!-- where标签 会去掉第一个and -->
+            <if test="list!=null">
+            <foreach collection="list" item="id" open=" ( "    close=" ) "   separator=" or ">
+                <if test="id!=null and id!='' ">
+                id=#{id}
+                </if>
+            </foreach>
+            </if>
+         </where>
+         
+    </select>
+    
     
     
     <insert id="insertCity" parameterType="pojo.City">

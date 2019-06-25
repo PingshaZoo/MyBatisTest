@@ -21,6 +21,6 @@ import pojo.City;
  */
 public class App {
 	public static void main(String[] args) throws Exception {
-		CityCurd.tryMapper();
+		CityCurd.tryFindCitysByIds();
 	}
 }

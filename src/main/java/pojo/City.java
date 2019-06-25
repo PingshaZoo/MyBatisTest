@@ -8,6 +8,9 @@ public class City {
 	public String district;
 	public String population;
 
+	public City() {
+	};
+	
 	public String getId() {
 		return id;
 	}

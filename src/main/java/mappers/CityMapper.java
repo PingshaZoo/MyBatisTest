@@ -17,5 +17,6 @@ public interface CityMapper {
 	public void insertCity(City city) throws Exception;
 	public void deleteCityById(String id) throws Exception;
 	public void updateCity(City city) throws Exception;
-	
+	public List<City> findCitysByCity(City city) throws Exception;
+	public List<City> findCitysByIds(List<String> ids) throws Exception;
 }
