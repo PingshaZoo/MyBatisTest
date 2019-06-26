@@ -85,4 +85,18 @@
             where id=#{id}
     </update>
     
+    
+    
+    
+    
+    <select  id="findCitysByCountryCode"  parameterType="java.lang.String"   resultType="pojo.City">
+     select * from city where CountryCode = #{countryCode}
+    </select>
+    
+    
+    
+    
+    
+    
+    
 </mapper>

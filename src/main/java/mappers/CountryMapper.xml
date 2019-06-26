@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<!-- namespace 必须等于mapper。java所在的命名空间，这是开发规范 -->
+<mapper namespace="mappers.CountryMapper">
+
+    <select  id="findCountryByCode"  parameterType="java.lang.String"   resultType="pojo.Country">
+     select * from Country where code = #{code}
+    </select>
+    
+    <resultMap type="pojo.Country" id="CountryLazyLoadingResultMap">
+    
+        <id column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="continent" property="continent"/>
+        <result column="region" property="region"/>
+        <result column="surfaceArea" property="surfaceArea"/>
+        <result column="indepYear" property="indepYear"/>
+        <result column="population" property="population"/>
+        <result column="lifeExpectancy" property="lifeExpectancy"/>
+        <result column="gnp" property="gnp"/>
+        <result column="gnpOld" property="gnpOld"/>
+        <result column="localName" property="localName"/>
+        <result column="governmentForm" property="governmentForm"/>
+        <result column="headOfState" property="headOfState"/>
+        <result column="capital" property="capital"/>
+        <result column="code2" property="code2"/>
+        
+        <collection property="citys" ofType="pojo.City">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="countryCode" property="countryCode"/>
+            <result column="district" property="district"/>
+            <result column="population" property="population"/>
+        </collection>
+        
+	    <collection property="countryLanguages" ofType="pojo.CountryLanguage">
+            <result column="countryCode" property="countryCode"/>
+            <result column="language" property="language"/>
+            <result column="isOfficial" property="isOfficial"/>
+            <result column="percentage" property="percentage"/>
+        </collection>
+        
+    </resultMap>
+    
+    <select id="findCountry" parameterType="java.lang.String"  resultMap="CountryLazyLoadingResultMap">
+    select country.*,city.*,countrylanguage.* from  city , country , countrylanguage 
+    where country.code = countrylanguage.CountryCode and country.code = city.CountryCode
+        and country.code = #{code} 
+    order by country.code,city.name;
+    </select>
+    
+</mapper>

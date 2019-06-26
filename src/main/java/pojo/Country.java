@@ -1,5 +1,7 @@
 package pojo;
 
+import java.util.List;
+
 public class Country {
 	public Country() {
 		
@@ -21,6 +23,23 @@ public class Country {
 	public String capital;
 	public String code2;
 	
+	public List<City> citys;
+	public List<CountryLanguage> countryLanguages;
+	
+	
+	
+	public List<City> getCitys() {
+		return citys;
+	}
+	public void setCitys(List<City> citys) {
+		this.citys = citys;
+	}
+	public List<CountryLanguage> getCountryLanguages() {
+		return countryLanguages;
+	}
+	public void setCountryLanguages(List<CountryLanguage> countryLanguages) {
+		countryLanguages = countryLanguages;
+	}
 	
 	public String getCode() {
 		return code;

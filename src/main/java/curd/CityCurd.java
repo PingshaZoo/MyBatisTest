@@ -10,7 +10,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import mappers.CityMapper;
+import mappers.CountryMapper;
 import pojo.City;
+import pojo.Country;
 
 public class CityCurd {
 
@@ -128,9 +130,39 @@ public class CityCurd {
 		List<City> citys = cityMapper.findCitysByIds(ids);
 		for (City c : citys) {
 			System.out.println(c.toString());
-			
+
 		}
 		System.out.println(citys.size());
+	}
+
+	public static void tryMapperfindCountryByCode() throws Exception {
+		String resPath = "SqlMapConfig.xml";
+		Reader reader = Resources.getResourceAsReader(resPath);
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+
+		CountryMapper countryMapper = sqlSession.getMapper(CountryMapper.class);
+		Country country = countryMapper.findCountryByCode("CHN");
+		System.out.println(country.toString());
+
+	}
+	
+	
+	public static void tryMapperfindCountry(String code) throws Exception {
+		String resPath = "SqlMapConfig.xml";
+		Reader reader = Resources.getResourceAsReader(resPath);
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+
+		CountryMapper countryMapper = sqlSession.getMapper(CountryMapper.class);
+		List<Country> Countries = countryMapper.findCountry(code);
+		System.out.println(Countries.size());
+		System.out.println(Countries.get(0).getName());
+		for(City c:Countries.get(0).citys) {
+			System.out.println(c.name);
+		}
+		
+
 	}
 
 }

@@ -19,4 +19,5 @@ public interface CityMapper {
 	public void updateCity(City city) throws Exception;
 	public List<City> findCitysByCity(City city) throws Exception;
 	public List<City> findCitysByIds(List<String> ids) throws Exception;
+	public List<City> findCitysByCountryCode(String countryCode) throws Exception;
 }
