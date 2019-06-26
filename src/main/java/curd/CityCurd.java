@@ -125,12 +125,12 @@ public class CityCurd {
 
 		CityMapper cityMapper = sqlSession.getMapper(CityMapper.class);
 		ArrayList<String> ids = new ArrayList<String>();
-		ids.add("23");
-		ids.add("20");
 		List<City> citys = cityMapper.findCitysByIds(ids);
 		for (City c : citys) {
 			System.out.println(c.toString());
+			
 		}
+		System.out.println(citys.size());
 	}
 
 }
