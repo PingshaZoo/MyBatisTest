@@ -12,31 +12,40 @@
 		
 		<!-- 二级cache 全局设置       全局开启之后，再在各个mapper中单独开启二级cache -->
 		<setting name="cacheEnabled" value="true"/>
-		
 	</settings>
+    
 	<!--指定简写名 -->
+    <typeAliases>
+    </typeAliases>
+    
+    
 	<!--配置环境，可以配置多个环境用于测试、调试和生产 -->
-	<environments default="development">
+    <!-- 与spring整合后去掉整个environments -->
+<!-- 	<environments default="development">
 		<environment id="development">
 
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
-                <!--mysql8用这个 property name="driver" value="com.mysql.cj.jdbc.Driver" / -->
+                mysql8用这个 property name="driver" value="com.mysql.cj.jdbc.Driver" /
 				<property name="driver" value="${jdbc.driver}" />
-				<!-- property name="url" value="jdbc:mysql://localhost:3306/world?useSSL=false&serverTimezone=UTC"/ -->
-				<!-- property name="url" value="jdbc:mysql://localhost:3306/world?useSSL=false"/ -->
-                <!-- property name="url" value="jdbc:mysql://localhost:3306/world?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC"/ -->
+				property name="url" value="jdbc:mysql://localhost:3306/world?useSSL=false&serverTimezone=UTC"/
+				property name="url" value="jdbc:mysql://localhost:3306/world?useSSL=false"/
+                property name="url" value="jdbc:mysql://localhost:3306/world?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC"/
 				<property name="url" value="${jdbc.url}" />
 				<property name="username" value="${jdbc.username}" />
 				<property name="password" value="${jdbc.password}" />
 			</dataSource>
 
 		</environment>
-	</environments>
+	</environments> -->
+    <!-- 与spring整合后去掉整个environments -->
+    
+    
 	<!--配置映射文件 -->
 	<mappers>
         <!-- 扫描包下面的xml和java文件  批量加载 -->
-        <package name="mappers"/>
+        <!-- spring整合了mybatis的mapper扫描 -->
+        <!-- <package name="mappers"/> -->
         <!-- 有resource和class两种导入方法 -->
         <!-- <mapper resource="CityMapper.xml" />  -->
 		<!-- <mapper class="mappers.CityMapper" /> -->

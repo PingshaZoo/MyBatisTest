@@ -16,8 +16,6 @@ public class CityDaoImpl implements CityDao {
 
 	private SqlSessionFactory sqlSessionFactory;
 
-	
-	
 	public City selectCity(String id) throws Exception {
 		SqlSession sqlSession = this.sqlSessionFactory.openSession();
 		City city = sqlSession.selectOne("dao.CityMapper.findCityByID", id);

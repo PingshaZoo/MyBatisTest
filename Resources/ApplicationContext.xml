@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd     
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+        ">
+
+        <!-- 自动扫描该包，SpringMVC会将包下用了@controller注解的类注册为Spring的controller -->     
+    <!-- <context:component-scan base-package="**"/>  -->
+    
+    <!-- 找property文件 -->
+    <context:property-placeholder location="classpath:db.properties"    ></context:property-placeholder>
+    
+     <bean id="dataSourceBean"   class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">  
+        <property name="driverClassName" value="${jdbc.driver}"/>  
+        <property name="url" value="${jdbc.url}"/>  
+        <property name="username" value="${jdbc.username}"/>  
+        <property name="password" value="${jdbc.password}"/>  
+    </bean>
+    
+
+     <bean id="sqlSessionFactory"   class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <property name="configLocation" value="SqlMapConfig.xml"/>  
+        <property name="dataSource" ref="dataSourceBean"/>  
+    </bean>
+    
+    
+     <!-- 此方法一个mapper 都要在这里配置，非常繁琐，几百个mapper就配置几百个这个不可能 -->
+<!--      <bean id="cityMapper"   class="org.mybatis.spring.mapper.MapperFactoryBean">  
+        <property name="mapperInterface" value="mappers.CityMapper"/>  
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>  
+     </bean> -->
+     
+     <!-- mapper批量扫描，从mapper包中扫描mapper接口，自动创建代理对象到spring容器中  然后mapper的beanid也自动生成 -->
+     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 整合原来mybtis的扫描包的配置，mybatis的扫描包配置可以删除了 -->
+        <property name="basePackage" value="mappers"></property>
+        <!-- 必须使用sqlSessionFactoryBeanName -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+     </bean>
+
+
+</beans>
