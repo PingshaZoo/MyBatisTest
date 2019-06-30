@@ -1,16 +1,27 @@
 package pojo;
 
-public class City {
+import java.io.Serializable;
+
+public class City implements Serializable{
 
 	public String id;
 	public String name;
 	public String countryCode;
 	public String district;
 	public String population;
+	public Country country;
 
 	public City() {
 	};
-	
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
 	public String getId() {
 		return id;
 	}

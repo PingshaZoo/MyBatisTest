@@ -5,6 +5,15 @@
     <!-- 加装db属性配置文件 -->
     <properties resource="db.properties"></properties>
 	<!--系统设置 -->
+	<settings>
+		<!-- lazy loading 配置 -->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
+		
+		<!-- 二级cache 全局设置       全局开启之后，再在各个mapper中单独开启二级cache -->
+		<setting name="cacheEnabled" value="true"/>
+		
+	</settings>
 	<!--指定简写名 -->
 	<!--配置环境，可以配置多个环境用于测试、调试和生产 -->
 	<environments default="development">

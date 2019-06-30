@@ -6,7 +6,7 @@
 <mapper namespace="mappers.CountryLanguageMapper">
 
     <select  id="findCountryLanguageByCountryCode"  parameterType="java.lang.String"   resultType="pojo.CountryLanguage">
-     select * from Country where CountryCode = #{countryCode}
+     select * from CountryLanguage where CountryCode = #{countryCode}
     </select>
     
 </mapper>

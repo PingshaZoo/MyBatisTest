@@ -12,12 +12,12 @@
     <resultMap type="pojo.Country" id="CountryLazyLoadingResultMap">
     
         <id column="code" property="code"/>
-        <result column="name" property="name"/>
+        <result column="countryName" property="name"/>
         <result column="continent" property="continent"/>
         <result column="region" property="region"/>
         <result column="surfaceArea" property="surfaceArea"/>
         <result column="indepYear" property="indepYear"/>
-        <result column="population" property="population"/>
+        <result column="CountryPopulation" property="population"/>
         <result column="lifeExpectancy" property="lifeExpectancy"/>
         <result column="gnp" property="gnp"/>
         <result column="gnpOld" property="gnpOld"/>
@@ -29,10 +29,10 @@
         
         <collection property="citys" ofType="pojo.City">
             <id column="id" property="id"/>
-            <result column="name" property="name"/>
-            <result column="countryCode" property="countryCode"/>
+            <result column="cityName" property="name"/>
+            <result column="CityCountryCode" property="countryCode"/>
             <result column="district" property="district"/>
-            <result column="population" property="population"/>
+            <result column="CityPopulation" property="population"/>
         </collection>
         
 	    <collection property="countryLanguages" ofType="pojo.CountryLanguage">
@@ -45,10 +45,26 @@
     </resultMap>
     
     <select id="findCountry" parameterType="java.lang.String"  resultMap="CountryLazyLoadingResultMap">
-    select country.*,city.*,countrylanguage.* from  city , country , countrylanguage 
-    where country.code = countrylanguage.CountryCode and country.code = city.CountryCode
-        and country.code = #{code} 
-    order by country.code,city.name;
+
+            select 
+            country.Name as countryName,country.Code as Code,country.Name as countryName,country.Continent as Continent,
+            country.Region as Region,country.SurfaceArea as SurfaceArea,country.IndepYear as IndepYear,country.Population as CountryPopulation,
+            country.LifeExpectancy as LifeExpectancy,country.GNP as GNP,country.GNPOld as GNPOld,country.LocalName as LocalName,
+            country.GovernmentForm as GovernmentForm,country.HeadOfState as HeadOfState,country.Capital as Capital,country.Code2 as Code2,
+            city.ID as ID,city.Name as cityName,city.CountryCode as CityCountryCode,city.District as District,city.Population as CityPopulation,
+            countrylanguage.CountryCode as  CountryCode,countrylanguage.IsOfficial as  IsOfficial,countrylanguage.Language as  Language,
+            countrylanguage.Percentage as  Percentage
+            from  city , country , countrylanguage 
+            
+            <where>
+            <!-- 入参是java.lang基本java类型， 而不是map或者实体的入参方式，对于这类单个入参然后用if判断的，mybatis有自己的内置对象 那就是_parameter,jdbcType数据类型加上 -->
+            country.code = countrylanguage.CountryCode and country.code = city.CountryCode
+            	<if test="_parameter !=null and _parameter !='' ">
+            	and country.code = #{code,jdbcType=STRING} 
+            	</if>
+            </where> 
+            
+            order by country.code,city.name;
     </select>
     
 </mapper>

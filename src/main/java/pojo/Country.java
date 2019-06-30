@@ -38,7 +38,7 @@ public class Country {
 		return countryLanguages;
 	}
 	public void setCountryLanguages(List<CountryLanguage> countryLanguages) {
-		countryLanguages = countryLanguages;
+		this.countryLanguages = countryLanguages;
 	}
 	
 	public String getCode() {

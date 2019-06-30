@@ -4,6 +4,9 @@
 
 <!-- namespace 必须等于mapper。java所在的命名空间，这是开发规范 -->
 <mapper namespace="mappers.CityMapper">
+	
+	<!-- 该mapper 开启二级缓存 -->
+	<cache></cache>
 
 
 
@@ -93,6 +96,28 @@
      select * from city where CountryCode = #{countryCode}
     </select>
     
+    
+    <resultMap type="pojo.City" id="findCityCountryLazyLoadResMap">
+    	<id column="ID" property="id"/>
+    	<result column="Name" property="name"/>
+    	<result column="CountryCode" property="countryCode"/>
+    	<result column="District" property="district"/>
+    	<result column="Population" property="population"/>
+    	
+    	<association property="country" javaType="pojo.Country" select="mappers.CountryMapper.findCountryByCode" column="CountryCode">
+			<!--  -->
+    	</association>
+    </resultMap>
+    
+    <select id="findCityCountryLazyLoad" parameterType="java.lang.String" resultMap="findCityCountryLazyLoadResMap">
+     select * from city 
+     	<!-- select city.ID as ID,city.Name as cityName,city.CountryCode as CityCountryCode,city.District as District,city.Population as CityPopulation from city  -->
+     	<where>
+     		<if test="_parameter!=null and _parameter!=''">
+     			id = #{id}
+     		</if>
+     	</where>
+    </select>
     
     
     
