@@ -35,13 +35,16 @@ import pojo.City;
  */
 public class App {
 	public static void main(String[] args) throws Exception {
+		testMybatis();
 	}
 
 
 	public static void testMybatis() throws Exception {
+		System.out.println("begin!");
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:ApplicationContext.xml");
 		CityMapper cityMapper = (CityMapper) applicationContext.getBean("cityMapper");
 		City city = cityMapper.findCityByID("123");
 		System.out.println(city);
+		System.out.println("conpleted!");
 	}
 }
