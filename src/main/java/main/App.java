@@ -43,6 +43,7 @@ public class App {
 		System.out.println("begin!");
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:ApplicationContext.xml");
 		CityMapper cityMapper = (CityMapper) applicationContext.getBean("cityMapper");
+		System.out.println(cityMapper.toString());
 		City city = cityMapper.findCityByID("123");
 		System.out.println(city);
 		System.out.println("conpleted!");
